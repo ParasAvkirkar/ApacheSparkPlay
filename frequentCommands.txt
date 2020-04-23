@@ -28,8 +28,7 @@ hdfs dfs -rm -r /user/cloudera/wordcountoutput
 
 
 
-
-
+Task 1:
 hdfs dfs -mkdir -p /user/root/cse532/input
 hdfs dfs -put covid19_full_data.csv /user/root/cse532/input/
 
@@ -39,6 +38,19 @@ jar -cvf Covid19_1.jar -C build/ .
 
 hadoop jar Covid19_1.jar Covid19_1 /user/root/cse532/input/covid19_full_data.csv false /user/root/cse532/output
 
+hadoop jar Covid19_1.jar Covid19_1 /user/root/cse532/input/covid19_full_data.csv false /user/root/cse532/outputFalse
+
+hadoop jar Covid19_1.jar Covid19_1 /user/root/cse532/input/covid19_full_data.csv true /user/root/cse532/outputTrue
+
 hdfs dfs -cat /user/root/cse532/output/*
 
+hdfs dfs -cat /user/root/cse532/outputTrue/*
+
+hdfs dfs -cat /user/root/cse532/outputFalse/*
+
+
 hdfs dfs -rm -r /user/root/cse532/output
+
+
+Validity: Zimbabwe (10)
+Date validity test: World 1391863

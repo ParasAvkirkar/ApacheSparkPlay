@@ -1,5 +1,6 @@
 
 
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
@@ -50,10 +51,11 @@ public class Covid19_1 {
 		
 			// processing only when non header rows encounterd
 			if (!"date".equals(columns[0])) {
-				if (!isWorld && "world".equals(columns[1].toLowerCase())) {
+				boolean isWorld = context.getConfiguration().getBoolean("isWorld", true);
+				if ("world".equals(columns[1].toLowerCase()) && !isWorld) {
 					return;
 				}
-				
+
 				Date date = parseDate(columns[0]);
 				Date oldDateFilter = parseDate("2019-12-31");
 				// considering dates only after Dec, 12, 2019
@@ -90,9 +92,10 @@ public class Covid19_1 {
 	
 	public static void main(String[] args)  throws Exception {
 		boolean isWorld = Boolean.parseBoolean(args[1]);
-		CaseMapper.isWorld = isWorld;
 
 		Configuration conf = new Configuration();
+		conf.setBoolean("isWorld", isWorld);
+
 		Job jobInstance = Job.getInstance(conf, "Total count of reported cases");
 		
 		jobInstance.setJarByClass(Covid19_1.class);
