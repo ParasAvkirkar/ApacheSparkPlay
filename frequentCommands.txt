@@ -1,0 +1,30 @@
+wget http://www.textfiles.com/anarchy/alko170.txt
+
+ls -lt
+
+hdfs dfs -ls /user
+
+hdfs dfs -ls /user/root
+
+hdfs dfs -put alko170.txt /user/root/myalkocopy.txt
+
+mkdir build
+
+javac -cp `hadoop classpath` MyWordCount.java -d build -Xlint
+
+jar -cvf MyWordCount.jar -C build/ .
+
+
+Tracking url:
+http://localhost:8088/proxy/application_1587587562850_0003/
+
+
+
+hadoop jar MyWordCount.jar MyWordCount /user/root/alko170.txt /user/root/wordcountoutput
+
+hdfs dfs -cat /user/root/wordcountoutput/*
+
+hdfs dfs -rm -r /user/cloudera/wordcountoutput
+
+
+
