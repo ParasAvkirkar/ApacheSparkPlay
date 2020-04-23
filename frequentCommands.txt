@@ -28,3 +28,17 @@ hdfs dfs -rm -r /user/cloudera/wordcountoutput
 
 
 
+
+
+hdfs dfs -mkdir -p /user/root/cse532/input
+hdfs dfs -put covid19_full_data.csv /user/root/cse532/input/
+
+javac -cp `hadoop classpath` Covid19_1.java -d build -Xlint
+
+jar -cvf Covid19_1.jar -C build/ .
+
+hadoop jar Covid19_1.jar Covid19_1 /user/root/cse532/input/covid19_full_data.csv false /user/root/cse532/output
+
+hdfs dfs -cat /user/root/cse532/output/*
+
+hdfs dfs -rm -r /user/root/cse532/output
