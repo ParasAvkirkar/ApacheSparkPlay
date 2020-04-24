@@ -1,6 +1,4 @@
 
-
-
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
@@ -27,9 +25,8 @@ public class Covid19_1 {
 		
 		private Date parseDate(String date) {
 			Date result = null;
-			
-			DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		
+
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd");		
 			try {
 				result = format.parse(date);
 			} catch (ParseException e) {
@@ -39,17 +36,24 @@ public class Covid19_1 {
 			return result;
 		}
 		
-		// The 4 types declared here should match the types that was declared on the top
-		public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
-			StringTokenizer columnTokens = new StringTokenizer(value.toString(), ",");
+		private String[] parseLineIntoColumns(StringTokenizer columnTokens) {
 			String columns[] = new String[4];
 			int i = 0;
 			while (i < 4 && columnTokens.hasMoreTokens()) {
 				columns[i] = columnTokens.nextToken();
 				++i;
 			}
+			
+			return columns;
+		}
 		
-			// processing only when non header rows encounterd
+		// The 4 types declared here should match the types that was declared on the top
+		public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+			StringTokenizer columnTokens = new StringTokenizer(value.toString(), ",");
+			
+			String columns[] = parseLineIntoColumns(columnTokens);
+			
+			// processing only when non header rows encountered
 			if (!"date".equals(columns[0])) {
 				boolean isWorld = context.getConfiguration().getBoolean("isWorld", true);
 				if ("world".equals(columns[1].toLowerCase()) && !isWorld) {
@@ -147,16 +151,8 @@ class CountryStatWritable implements Writable {
 		return countryName;
 	}
 
-	public void setCountryName(Text countryName) {
-		this.countryName = countryName;
-	}
-
 	public LongWritable getCaseCount() {
 		return caseCount;
-	}
-
-	public void setCaseCount(LongWritable caseCount) {
-		this.caseCount = caseCount;
 	}
 
 	@Override

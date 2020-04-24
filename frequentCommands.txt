@@ -54,3 +54,25 @@ hdfs dfs -rm -r /user/root/cse532/output
 
 Validity: Zimbabwe (10)
 Date validity test: World 1391863
+
+To sum of columns in awk: awk '{s+=$3}END{print s}'
+
+
+Task 2:
+hdfs dfs -mkdir -p /user/root/cse532/outputTask2
+hdfs dfs -mkdir -p /user/cloudera/cse532/outputTask2
+
+javac -cp `hadoop classpath` Covid19_2.java -d build -Xlint
+
+jar -cvf Covid19_2.jar -C build/ .
+
+hadoop Covid19_2.jar Covid19_2 /cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 /cse532/outputTask2/
+hadoop Covid19_2.jar Covid19_2 /user/cloudera/cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 /user/cloudera/cse532/outputTask2/
+
+hdfs dfs -cat /user/root/cse532/outputTask2/*
+
+
+CloudEra
+quickstart.cloudera:7180/cmf/home
+
+
