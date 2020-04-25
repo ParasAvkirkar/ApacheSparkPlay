@@ -66,13 +66,34 @@ javac -cp `hadoop classpath` Covid19_2.java -d build -Xlint
 
 jar -cvf Covid19_2.jar -C build/ .
 
-hadoop Covid19_2.jar Covid19_2 /cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 /cse532/outputTask2/
-hadoop Covid19_2.jar Covid19_2 /user/cloudera/cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 /user/cloudera/cse532/outputTask2/
+hadoop jar Covid19_2.jar Covid19_2 /cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 /cse532/outputTask2/
+
+hadoop jar Covid19_2.jar Covid19_2 /user/cloudera/cse532/input/covid19_full_data.csv 2019-12-31 2020-04-08 /user/cloudera/cse532/outputTask2/
 
 hdfs dfs -cat /user/root/cse532/outputTask2/*
+
+hdfs dfs -rm -r /user/cloudera/cse532/outputTask2/*
 
 
 CloudEra
 quickstart.cloudera:7180/cmf/home
 
 
+
+Task 3:
+Print only countries having population > 0
+Ignore the country having inconsistent delimiter splits, indirectly ignore the countries whose population is not available
+Use column-1 for country, column-4 for population
+Remove combiner
+
+javac -cp `hadoop classpath` Covid19_3.java -d build -Xlint
+
+jar -cvf Covid19_3.jar -C build/ .
+
+hadoop jar Covid19_3.jar Covid19_3 /user/cloudera/cse532/input/covid19_full_data.csv hdfs://quickstart.cloudera:8020/user/cloudera/cse532/cache/populations.csv /user/cloudera/cse532/outputTask3
+
+hdfs dfs -cat /user/cloudera/cse532/outputTask3/*
+
+hdfs dfs -rm -r /user/cloudera/cse532/outputTask3
+
+hdfs dfs -cat /user/cloudera/cse532/outputTask3/*
