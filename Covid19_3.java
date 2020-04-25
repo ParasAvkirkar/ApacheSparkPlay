@@ -83,7 +83,7 @@ public class Covid19_3 {
         public void reduce(Text key, Iterable<CountryStatWritable> values, Context context) throws IOException, InterruptedException {
             String countryName = key.toString();
             if (populationMap.containsKey(countryName)) {
-                long totalCases = 1;
+                long totalCases = 0;
                 for (CountryStatWritable stat: values) {
                     totalCases += stat.getCaseCount().get();
                 }
