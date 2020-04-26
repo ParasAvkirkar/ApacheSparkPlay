@@ -97,3 +97,33 @@ hdfs dfs -cat /user/cloudera/cse532/outputTask3/*
 hdfs dfs -rm -r /user/cloudera/cse532/outputTask3
 
 hdfs dfs -cat /user/cloudera/cse532/outputTask3/*
+
+
+
+Spark tasks:
+SparkCovid19_1
+
+javac -cp "/home/cloudera/Downloads/spark-2.4.5-bin-hadoop2.7/jars/*" SparkCovid19_1.java -d build -Xlint
+
+jar -cvf SparkCovid19_1.jar -C build/ .
+
+/home/cloudera/Downloads/spark-2.4.5-bin-hadoop2.7/jars
+/home/cloudera/Downloads/spark-2.4.5-bin-hadoop2.7/jars.spark-core_2.11-2.4.5.jar
+
+
+
+
+spark-submit --class SparkCovid19_1 SparkCovid19_1.jar /user/cloudera/cse532/input/covid19_full_data.csv 2019-12-31 2020-04-08 /user/cloudera/cse532/outputSparkTask1/
+
+spark-submit --class SparkCovid19_1 SparkCovid19_1.jar hdfs://quickstart.cloudera:8020/user/cloudera/cse532/input/covid19_full_data.csv 2019-12-31 2020-04-08 hdfs://quickstart.cloudera:8020/user/cloudera/cse532/outputSparkTask1/
+
+
+spark-submit --class SparkCovid19_1 SparkCovid19_1.jar hdfs://quickstart.cloudera:8020/user/cloudera/cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 hdfs://quickstart.cloudera:8020/user/cloudera/cse532/outputSparkTask1/
+
+
+
+
+hdfs 
+
+hdfs dfs -rm -r /user/cloudera/cse532/outputSparkTask1/
+
