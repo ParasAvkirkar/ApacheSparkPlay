@@ -1,0 +1,22 @@
+Timing method for the Hadoop Task-2, Task-3 and Spark Task-1, Task-2
+
+I used UNIX "time" command. (time <command to run>)
+There are 3 components of the time command output: 
+
+The Real time component represents actual time taken to complete the job
+because it includes the time to complete hadoop job, log the status and response the result back.
+
+
+
+Task to compute death counts for a given date range
+Hadoop Task-2: 22.618 seconds
+Spark Task-1: 6.502 seconds
+
+The spark task had a better performance. It finish the task just in 6 seconds.
+
+
+Task to compute cases per million
+Hadoop Task-3: 22.471 seconds
+Spark Task-2: 6.918 seconds
+
+The spark task had a better performance. It finish the task just in roughly 6 seconds.
