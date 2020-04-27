@@ -11,6 +11,19 @@ import scala.Tuple2;
 
 import java.util.*;
 
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaPairRDD;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.Function;
+import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.api.java.function.PairFlatMapFunction;
+import org.apache.spark.api.java.function.PairFunction;
+import org.apache.spark.broadcast.Broadcast;
+import scala.Tuple2;
+
+import java.util.*;
+
 public class SparkCovid19_2 {
 
     private static HashMap<String, Long> readCountryPopulation(String filePath, JavaSparkContext sparkContext) {

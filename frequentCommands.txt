@@ -40,7 +40,11 @@ hadoop jar Covid19_1.jar Covid19_1 /user/root/cse532/input/covid19_full_data.csv
 
 hadoop jar Covid19_1.jar Covid19_1 /user/root/cse532/input/covid19_full_data.csv false /user/root/cse532/outputFalse
 
+hadoop jar Covid19_1.jar Covid19_1 /user/cloudera/cse532/input/covid19_full_data.csv false /user/cloudera/cse532/outputFalse
+
 hadoop jar Covid19_1.jar Covid19_1 /user/root/cse532/input/covid19_full_data.csv true /user/root/cse532/outputTrue
+
+hadoop jar Covid19_1.jar Covid19_1 /user/cloudera/cse532/input/covid19_full_data.csv true /user/cloudera/cse532/outputTrue
 
 hdfs dfs -cat /user/root/cse532/output/*
 
@@ -66,7 +70,7 @@ javac -cp `hadoop classpath` Covid19_2.java -d build -Xlint
 
 jar -cvf Covid19_2.jar -C build/ .
 
-hadoop jar Covid19_2.jar Covid19_2 /cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 /cse532/outputTask2/
+hadoop jar Covid19_2.jar Covid19_2 /user/cloudera/cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 /user/cloudera/cse532/outputTask2/
 
 hadoop jar Covid19_2.jar Covid19_2 /user/cloudera/cse532/input/covid19_full_data.csv 2019-12-31 2020-04-08 /user/cloudera/cse532/outputTask2/
 
@@ -132,4 +136,33 @@ jar -cvf SparkCovid19_2.jar -C build/ .
 
 
 spark-submit --class SparkCovid19_2 SparkCovid19_2.jar hdfs://quickstart.cloudera:8020/user/cloudera/cse532/input/covid19_full_data.csv hdfs://quickstart.cloudera:8020/user/cloudera/cse532/cache/populations.csv hdfs://quickstart.cloudera:8020/user/cloudera/cse532/outputSparkTask2
+
+
+
+Time stats:
+Hadoop Task 2
+real    0m22.681s
+user    0m5.886s
+sys     0m0.645s
+
+Time stats:
+Spark Task 1
+real    0m6.502s
+user    0m12.049s
+sys     0m1.555s
+
+
+Time stats:
+Hadoop Task 3
+real    0m22.471s
+user    0m6.085s
+sys     0m0.702s
+
+Time stats:
+Spark Task 2
+real    0m6.918s
+user    0m11.932s
+sys     0m1.595s
+
+
 
