@@ -120,10 +120,16 @@ spark-submit --class SparkCovid19_1 SparkCovid19_1.jar hdfs://quickstart.clouder
 
 spark-submit --class SparkCovid19_1 SparkCovid19_1.jar hdfs://quickstart.cloudera:8020/user/cloudera/cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 hdfs://quickstart.cloudera:8020/user/cloudera/cse532/outputSparkTask1/
 
-
-
-
-hdfs 
-
 hdfs dfs -rm -r /user/cloudera/cse532/outputSparkTask1/
+
+
+
+SparkCovid19_2
+
+javac -cp "/home/cloudera/Downloads/spark-2.4.5-bin-hadoop2.7/jars/*" SparkCovid19_2.java -d build -Xlint
+
+jar -cvf SparkCovid19_2.jar -C build/ .
+
+
+spark-submit --class SparkCovid19_2 SparkCovid19_2.jar hdfs://quickstart.cloudera:8020/user/cloudera/cse532/input/covid19_full_data.csv hdfs://quickstart.cloudera:8020/user/cloudera/cse532/cache/populations.csv hdfs://quickstart.cloudera:8020/user/cloudera/cse532/outputSparkTask2
 
